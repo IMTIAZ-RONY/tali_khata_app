@@ -14,6 +14,9 @@ class HomeController extends GetxController {
   final RxDouble userAmount = 130.00.obs;
   final RxString userDuration = '২৩ দিন'.obs;
 
+  // FAB position
+  final Rx<Offset> fabPosition = const Offset(200, 400).obs;
+
   // Menu items
   final List<Map<String, dynamic>> menuItems = [
     {
@@ -105,5 +108,9 @@ class HomeController extends GetxController {
       colorText: Colors.white,
       duration: const Duration(seconds: 2),
     );
+  }
+
+  void updateFabPosition(Offset newPosition) {
+    fabPosition.value = newPosition;
   }
 }

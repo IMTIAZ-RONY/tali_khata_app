@@ -10,7 +10,44 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: _buildAppBar(),
-      body: _buildBody(),
+      body: Stack(
+        children: [
+          _buildBody(),
+          Obx(() => Positioned(
+                left: controller.fabPosition.value.dx,
+                top: controller.fabPosition.value.dy,
+                child: Draggable(
+                  feedback: FloatingActionButton.extended(
+                    onPressed: controller.onNewCustomerTap,
+                    backgroundColor: const Color(0xFFE53935),
+                    label: const Text(
+                      'নতুন কাস্টমার',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    icon: const Icon(
+                      Icons.person_add,
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: FloatingActionButton.extended(
+                    onPressed: controller.onNewCustomerTap,
+                    backgroundColor: const Color(0xFFE53935),
+                    label: const Text(
+                      'নতুন কাস্টমার',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    icon: const Icon(
+                      Icons.person_add,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onDragEnd: (details) {
+                    controller.updateFabPosition(details.offset);
+                  },
+                ),
+              )),
+        ],
+      ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
@@ -21,39 +58,40 @@ class HomeView extends GetView<HomeController> {
       backgroundColor: const Color(0xFFE53935),
       title: Row(
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Prigramming Wor...',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Programming Wor...',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 5),
-                Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ],
+                  const SizedBox(width: 5),
+                  const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ],
+              ),
             ),
           ),
-
         ],
-
       ),
-
       actions: [
-
         Stack(
           children: [
             IconButton(
@@ -62,6 +100,7 @@ class HomeView extends GetView<HomeController> {
             ),
           ],
         ),
+        const SizedBox(width: 8),
         Stack(
           children: [
             IconButton(
@@ -135,25 +174,27 @@ class HomeView extends GetView<HomeController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'আনলিমিটেড হিসার',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'আনলিমিটেড হিসার',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
-              ),
-              Text(
-                'রেকর্ড করতে',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black87,
+                Text(
+                  'রেকর্ড করতে',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black87,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
@@ -172,7 +213,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 const SizedBox(width: 5),
-                Icon(
+                const Icon(
                   Icons.arrow_forward,
                   color: Colors.white,
                   size: 18,
@@ -261,13 +302,13 @@ class HomeView extends GetView<HomeController> {
               child: Column(
                 children: [
                   Obx(() => Text(
-                    '${controller.totalAmount.value.toInt()}',
-                    style: const TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFE53935),
-                    ),
-                  )),
+                        '${controller.totalAmount.value.toInt()}',
+                        style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFE53935),
+                        ),
+                      )),
                   const Text(
                     'মোট পাওনা',
                     style: TextStyle(
@@ -297,13 +338,13 @@ class HomeView extends GetView<HomeController> {
               child: Column(
                 children: [
                   Obx(() => Text(
-                    '${controller.receivableAmount.value.toInt()}',
-                    style: const TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                    ),
-                  )),
+                        '${controller.receivableAmount.value.toInt()}',
+                        style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      )),
                   const Text(
                     'মোট দেনা',
                     style: TextStyle(
@@ -404,38 +445,44 @@ class HomeView extends GetView<HomeController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'কাস্টমার ১ / সাপ্লায়ার ০',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
+              const Expanded(
+                child: Text(
+                  'কাস্টমার ১ / সাপ্লায়ার ০',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'পাওনা',
-                      style: TextStyle(
-                        color: Color(0xFFE53935),
-                        fontWeight: FontWeight.w500,
+              Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'পাওনা',
+                        style: TextStyle(
+                          color: Color(0xFFE53935),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-                  ),
-                  const Text(' / '),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'দেনা',
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.w500,
+                    const Text(' / '),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'দেনা',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -457,39 +504,39 @@ class HomeView extends GetView<HomeController> {
               leading: CircleAvatar(
                 backgroundColor: Colors.green.withOpacity(0.2),
                 child: Obx(() => Text(
-                  controller.userInitials.value,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
-                )),
+                      controller.userInitials.value,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    )),
               ),
               title: Obx(() => Text(
-                controller.userName.value,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
-              )),
+                    controller.userName.value,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  )),
               subtitle: Obx(() => Text(
-                controller.userDuration.value,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                ),
-              )),
+                    controller.userDuration.value,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ),
+                  )),
               trailing: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Obx(() => Text(
-                    '৳${controller.userAmount.value.toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.green,
-                    ),
-                  )),
+                        '৳${controller.userAmount.value.toStringAsFixed(2)}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.green,
+                        ),
+                      )),
                   const Icon(
                     Icons.arrow_forward_ios,
                     size: 16,
@@ -517,10 +564,7 @@ class HomeView extends GetView<HomeController> {
           ),
         ],
       ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Obx(() => BottomNavigationBar(
+      child: Obx(() => BottomNavigationBar(
             currentIndex: controller.currentBottomNavIndex.value,
             onTap: controller.changeBottomNavIndex,
             type: BottomNavigationBarType.fixed,
@@ -547,30 +591,6 @@ class HomeView extends GetView<HomeController> {
               ),
             ],
           )),
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: FloatingActionButton(
-              onPressed: controller.onNewCustomerTap,
-              backgroundColor: const Color(0xFFE53935),
-              child: Row(
-                 children: [
-                   Icon(
-                     Icons.person_add,
-                     color: Colors.white,
-                   ),
-                   const SizedBox(width: 5),
-                   const Text(
-                     'নতুন কাস্টমার',
-                     style: TextStyle(
-                       color: Colors.white,),)
-
-                 ],
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
