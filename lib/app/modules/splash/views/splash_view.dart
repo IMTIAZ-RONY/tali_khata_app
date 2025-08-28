@@ -9,10 +9,7 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SplashView'),
-        centerTitle: true,
-      ),
+
       body:  Center(
         child: ImageManager.logo.image(
           width: 150,
