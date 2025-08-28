@@ -1,7 +1,6 @@
 import 'package:tali_khata_app/exports.dart';
 import '../controllers/home_controller.dart';
 
-
 class HomeView extends GetView<HomeController> {
    const HomeView({Key? key}) : super(key: key);
 
@@ -17,7 +16,7 @@ class HomeView extends GetView<HomeController> {
           backgroundColor: const Color(0xFFE53935),
           label: const Text(
             'নতুন কাস্টমার',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(fontSize:10,color: Colors.white),
           ),
           icon: const Icon(
             Icons.person_add,
@@ -69,7 +68,7 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  SizedBox(height: 6,),
                   Text("স্ট্যান্ডার্ড",style: TextStyle(color: Colors.white,fontSize: 12),),
                 ]
               
@@ -100,7 +99,7 @@ class HomeView extends GetView<HomeController> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: Colors.white, size: 24),
+                Icon(icon, color: Colors.white, size: 20),
                 const SizedBox(height: 2),
                 Text(
                   label,
@@ -179,7 +178,7 @@ class HomeView extends GetView<HomeController> {
                 Text(
                   'আনলিমিটেড হিসাব',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
@@ -187,7 +186,7 @@ class HomeView extends GetView<HomeController> {
                 Text(
                   'রেকর্ড করতে',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     color: Colors.black87,
                   ),
                 ),
@@ -195,7 +194,7 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
             decoration: BoxDecoration(
               color: const Color(0xFFE53935),
               borderRadius: BorderRadius.circular(20),
@@ -208,13 +207,14 @@ class HomeView extends GetView<HomeController> {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
+                    fontSize: 10,
                   ),
                 ),
                 const SizedBox(width: 5),
                 const Icon(
                   Icons.arrow_forward,
                   color: Colors.white,
-                  size: 18,
+                  size: 16,
                 ),
               ],
             ),
@@ -384,6 +384,10 @@ class HomeView extends GetView<HomeController> {
                 onChanged: controller.onSearchChanged,
                 decoration: const InputDecoration(
                   hintText: 'খোঁজ',
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
                   prefixIcon: Icon(Icons.search, color: Colors.grey),
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(vertical: 15),
@@ -448,7 +452,7 @@ class HomeView extends GetView<HomeController> {
                 child: Text(
                   'কাস্টমার ১ / সাপ্লায়ার ০',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
@@ -530,7 +534,7 @@ class HomeView extends GetView<HomeController> {
                     '৳${controller.userAmount.value.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Colors.green,
                     ),
                   ),
