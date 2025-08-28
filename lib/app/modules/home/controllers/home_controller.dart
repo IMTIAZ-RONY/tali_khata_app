@@ -7,9 +7,10 @@ class HomeController extends GetxController {
   final RxDouble receivableAmount = 130.0.obs;
   final RxString searchQuery = ''.obs;
   final TextEditingController searchController = TextEditingController();
+  final RxString businessName = 'Programming World'.obs;
 
   // User data
-  final RxString userName = 'Md Shirajul'.obs;
+  final RxString userName = 'Imtiaz Shamim'.obs;
   final RxString userInitials = 'MS'.obs;
   final RxDouble userAmount = 130.00.obs;
   final RxString userDuration = '২৩ দিন'.obs;
@@ -20,7 +21,7 @@ class HomeController extends GetxController {
   // Menu items
   final List<Map<String, dynamic>> menuItems = [
     {
-      'title': 'মানি ব্যবস্থা',
+      'title': 'মাল্টি ব্যবসা',
       'icon': Icons.book,
       'color': Colors.green,
     },
@@ -35,7 +36,7 @@ class HomeController extends GetxController {
       'color': Colors.orange,
     },
     {
-      'title': 'ক্রুপ তাগাদা',
+      'title': 'গ্রুপ তাগাদা',
       'icon': Icons.notifications,
       'color': Colors.green,
     },
@@ -50,7 +51,7 @@ class HomeController extends GetxController {
       'color': Colors.green,
     },
     {
-      'title': 'চালি-মেজার',
+      'title': 'টালি-মেসেজ',
       'icon': Icons.trending_up,
       'color': Colors.red,
     },

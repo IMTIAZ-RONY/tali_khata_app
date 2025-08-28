@@ -59,85 +59,106 @@ class HomeView extends GetView<HomeController> {
       title: Row(
         children: [
           Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha:0.2),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
+            child:Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Expanded(
-                    child: Text(
-                      'Programming Wor...',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      overflow: TextOverflow.ellipsis,
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha:0.2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Obx(() => Expanded(
+                          child: Text(
+                            controller.businessName.value,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )),
+                        const SizedBox(width: 5),
+                        const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(width: 5),
-                  const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ],
-              ),
-            ),
+                  SizedBox(width: 5,),
+                  Text("স্ট্যান্ডার্ড",style: TextStyle(color: Colors.white,fontSize: 12),),
+                ]
+              
+            ) ,
           ),
         ],
       ),
       actions: [
-        Stack(
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.cloud_outlined, color: Colors.white),
-            ),
-          ],
-        ),
+        _buildActionItem(Icons.cloud_outlined, "ব্যাকআপ"),
         const SizedBox(width: 8),
-        Stack(
+        _buildActionItem(Icons.email_outlined, "ইনবক্স", badgeCount: 79),
+        const SizedBox(width: 8),
+        _buildActionItem(Icons.help_outline_outlined, "হেল্প"),
+        const SizedBox(width: 8),
+      ],
+    );
+  }
+
+  Widget _buildActionItem(IconData icon, String label, {int? badgeCount}) {
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Stack(
+          clipBehavior: Clip.none,
           children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.email_outlined, color: Colors.white),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, color: Colors.white, size: 24),
+                const SizedBox(height: 2),
+                Text(
+                  label,
+                  style: const TextStyle(color: Colors.white, fontSize: 10),
+                )
+              ],
             ),
-            Positioned(
-              right: 8,
-              top: 8,
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                constraints: const BoxConstraints(
-                  minWidth: 20,
-                  minHeight: 20,
-                ),
-                child: const Text(
-                  '79',
-                  style: TextStyle(
-                    color: Color(0xFFE53935),
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
+            if (badgeCount != null)
+              Positioned(
+                right: -5,
+                top: -5,
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  textAlign: TextAlign.center,
+                  constraints: const BoxConstraints(
+                    minWidth: 18,
+                    minHeight: 18,
+                  ),
+                  child: Text(
+                    badgeCount.toString(),
+                    style: const TextStyle(
+                      color: Color(0xFFE53935),
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
-            ),
           ],
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.help_outline_outlined, color: Colors.white),
-        ),
-      ],
+      ),
     );
   }
 
@@ -179,7 +200,7 @@ class HomeView extends GetView<HomeController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'আনলিমিটেড হিসার',
+                  'আনলিমিটেড হিসাব',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -232,11 +253,11 @@ class HomeView extends GetView<HomeController> {
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-          childAspectRatio: 0.8,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 0.85,
         ),
         itemCount: controller.menuItems.length,
         itemBuilder: (context, index) {
@@ -246,24 +267,25 @@ class HomeView extends GetView<HomeController> {
             child: Column(
               children: [
                 Container(
-                  width: 50,
-                  height: 50,
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
-                    color: item['color'].withValues(alpha:0.1),
+                    color: item['color'].withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
                     item['icon'],
                     color: item['color'],
-                    size: 28,
+                    size: 24,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 6),
                 Expanded(
                   child: Text(
                     item['title'],
+                    textScaleFactor:0.9,
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 10,
                       fontWeight: FontWeight.w500,
                       color: Colors.black87,
                     ),
@@ -445,7 +467,7 @@ class HomeView extends GetView<HomeController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Expanded(
+              const Flexible(
                 child: Text(
                   'কাস্টমার ১ / সাপ্লায়ার ০',
                   style: TextStyle(
@@ -453,7 +475,6 @@ class HomeView extends GetView<HomeController> {
                     fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               Flexible(
@@ -525,25 +546,25 @@ class HomeView extends GetView<HomeController> {
                       fontSize: 12,
                     ),
                   )),
-              trailing: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
+              trailing: Obx(() => Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Obx(() => Text(
-                        '৳${controller.userAmount.value.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.green,
-                        ),
-                      )),
+                  Text(
+                    '৳${controller.userAmount.value.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.green,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
                   const Icon(
                     Icons.arrow_forward_ios,
                     size: 16,
                     color: Colors.grey,
                   ),
                 ],
-              ),
+              )),
               onTap: controller.onUserProfileTap,
             ),
           ),
