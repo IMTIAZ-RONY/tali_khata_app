@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class HomeView extends GetView<HomeController> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha:0.2),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
@@ -249,7 +249,7 @@ class HomeView extends GetView<HomeController> {
                   width: 50,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: item['color'].withOpacity(0.1),
+                    color: item['color'].withValues(alpha:0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
@@ -293,7 +293,7 @@ class HomeView extends GetView<HomeController> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: Colors.grey.withValues(alpha:0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -329,7 +329,7 @@ class HomeView extends GetView<HomeController> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: Colors.grey.withValues(alpha:0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -374,7 +374,7 @@ class HomeView extends GetView<HomeController> {
                 borderRadius: BorderRadius.circular(25),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: Colors.grey.withValues(alpha:0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -401,7 +401,7 @@ class HomeView extends GetView<HomeController> {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
+                  color: Colors.grey.withValues(alpha:0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 5),
                 ),
@@ -421,7 +421,7 @@ class HomeView extends GetView<HomeController> {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
+                  color: Colors.grey.withValues(alpha:0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 5),
                 ),
@@ -493,7 +493,7 @@ class HomeView extends GetView<HomeController> {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
+                  color: Colors.grey.withValues(alpha:0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 5),
                 ),
@@ -502,7 +502,7 @@ class HomeView extends GetView<HomeController> {
             child: ListTile(
               contentPadding: const EdgeInsets.all(16),
               leading: CircleAvatar(
-                backgroundColor: Colors.green.withOpacity(0.2),
+                backgroundColor: Colors.green.withValues(alpha:0.2),
                 child: Obx(() => Text(
                       controller.userInitials.value,
                       style: const TextStyle(
@@ -558,7 +558,7 @@ class HomeView extends GetView<HomeController> {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.grey.withValues(alpha:0.3),
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
