@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:tali_khata_app/exports.dart';
 
 class HomeController extends GetxController {
   final RxInt currentBottomNavIndex = 0.obs;

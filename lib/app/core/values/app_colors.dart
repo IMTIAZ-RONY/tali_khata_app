@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:tali_khata_app/exports.dart';
 
 class AppColors {
   static const Color primary = Color(0xFFE53935);

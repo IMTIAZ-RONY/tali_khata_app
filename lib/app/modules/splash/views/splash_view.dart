@@ -1,5 +1,4 @@
 import 'package:tali_khata_app/exports.dart';
-
 import '../../../core/utils/assets_manager.dart';
 import '../controllers/splash_controller.dart';
 

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:tali_khata_app/exports.dart';
 import '../controllers/home_controller.dart';
+
 
 class HomeView extends GetView<HomeController> {
    const HomeView({Key? key}) : super(key: key);
@@ -10,43 +10,20 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: _buildAppBar(),
-      body: Stack(
-        children: [
-          _buildBody(),
-          Obx(() => Positioned(
-                left: controller.fabPosition.value.dx,
-                top: controller.fabPosition.value.dy,
-                child: Draggable(
-                  feedback: FloatingActionButton.extended(
-                    onPressed: controller.onNewCustomerTap,
-                    backgroundColor: const Color(0xFFE53935),
-                    label: const Text(
-                      'নতুন কাস্টমার',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    icon: const Icon(
-                      Icons.person_add,
-                      color: Colors.white,
-                    ),
-                  ),
-                  child: FloatingActionButton.extended(
-                    onPressed: controller.onNewCustomerTap,
-                    backgroundColor: const Color(0xFFE53935),
-                    label: const Text(
-                      'নতুন কাস্টমার',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    icon: const Icon(
-                      Icons.person_add,
-                      color: Colors.white,
-                    ),
-                  ),
-                  onDragEnd: (details) {
-                    controller.updateFabPosition(details.offset);
-                  },
-                ),
-              )),
-        ],
+      body: _buildBody(),
+      floatingActionButton: DraggableFab(
+        child: FloatingActionButton.extended(
+          onPressed: controller.onNewCustomerTap,
+          backgroundColor: const Color(0xFFE53935),
+          label: const Text(
+            'নতুন কাস্টমার',
+            style: TextStyle(color: Colors.white),
+          ),
+          icon: const Icon(
+            Icons.person_add,
+            color: Colors.white,
+          ),
+        ),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );

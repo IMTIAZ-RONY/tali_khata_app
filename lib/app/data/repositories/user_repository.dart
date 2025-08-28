@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:tali_khata_app/exports.dart';
 import '../models/user_model.dart';
 
 class UserRepository extends GetxService {
